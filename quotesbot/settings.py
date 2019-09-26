@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+import shadow_useragent
+
+#USER_AGENT_LIST = "quotesbot/agent_list"
 
 # Scrapy settings for quotesbot project
 #
@@ -15,8 +18,12 @@ SPIDER_MODULES = ['quotesbot.spiders']
 NEWSPIDER_MODULE = 'quotesbot.spiders'
 
 
+#shadow user agent
+ua = shadow_useragent.ShadowUserAgent()
+ua = ua.most_common
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'quotesbot (+http://www.yourdomain.com)'
+USER_AGENT = ua
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -27,13 +34,14 @@ ROBOTSTXT_OBEY = True
 # Configure a delay for requests for the same website (default: 0)
 # See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-#DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 3
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
-#COOKIES_ENABLED = False
+COOKIES_ENABLED = True
+COOKIES_DEBUG = True
 
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED = False
@@ -55,6 +63,10 @@ ROBOTSTXT_OBEY = True
 #DOWNLOADER_MIDDLEWARES = {
 #    'quotesbot.middlewares.MyCustomDownloaderMiddleware': 543,
 #}
+# DOWNLOADER_MIDDLEWARES = {
+#     'scrapy.contrib.downloadermiddleware.useragent.UserAgentMiddleware': None,
+#     'random_useragent.RandomUserAgentMiddleware': 400
+# }
 
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html
@@ -70,9 +82,9 @@ ROBOTSTXT_OBEY = True
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
-#AUTOTHROTTLE_ENABLED = True
+AUTOTHROTTLE_ENABLED = True
 # The initial download delay
-#AUTOTHROTTLE_START_DELAY = 5
+AUTOTHROTTLE_START_DELAY = 5
 # The maximum download delay to be set in case of high latencies
 #AUTOTHROTTLE_MAX_DELAY = 60
 # The average number of requests Scrapy should be sending in parallel to
